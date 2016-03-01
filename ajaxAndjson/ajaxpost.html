@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id='show'></div>
+        <script>
+            window.onload = function(){
+                var oShow = document.getElementById('show');
+                var postData = {"name":"Ann"};
+                postData = (function(obj){ // 转成post需要的字符串.
+                var str = "";
+
+                for(var prop in obj){
+                    str += prop + "=" + obj[prop] + "&"
+                }
+                return str;
+                
+            })(postData); 
+            
+            
+           ////////1 create xmlhttp
+            var xmlhttp;
+            if(window.XMLHttpRequest){
+                xmlhttp = new XMLHttpRequest;
+                if(xmlhttp.overrideMimeType){
+                    xmlhttp.overrideMimeType("text/xml");
+                }
+            }else if(window.ActiveXObject){
+                try{
+                    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                catch(e){
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHttp");
+                }
+            }
+            if(!xmlhttp){
+                oShow.innerHTML ="you browser does not support xmlhttprequest ";
+                return;
+            }
+            ////2 create http request
+            xmlhttp.open('POST','ajaxpost.php',true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            ////3 set function
+            xmlhttp.onreadystatechange=callback;
+            //////4 send data
+            xmlhttp.send(postData);
+
+            
+            function callback(){
+                if(xmlhttp.readyState==4){
+                    if(xmlhttp.status==200){
+                        ////5 get return data and flush partially
+                        oShow.innerHTML = xmlhttp.responseText;
+                    }
+                }
+            }
+            
+            }
+        </script>
+    </body>
+</html>

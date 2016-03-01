@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+        <div id='contain'>
+            <input type='text' id='username'/>
+            <input type='button' id='btn' value='apply'/>
+            <div id='box'></div>
+        </div>
+        <script>
+            window.onload = function(){
+                var oName = document.getElementById('username');
+                var oBtn = document.getElementById('btn');
+                var divNode = document.getElementById('box');
+                var xmlhttp;
+                
+                oBtn.onclick = function(){
+                    var sName = oName.value;
+                    if(window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest;
+                        if(xmlhttp.overrideMimeType){
+                            xmlhttp.overrideMimeType("text/xml");
+                        }
+                    }else if(window.ActiveXObject){
+                        try{
+                            xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                        }
+                        catch(e){
+                            xmlhttp = new ActiveXObject("Microsoft.XMLHttp");
+                        }
+                    }
+                    if(!xmlhttp){
+                        oShow.innerHTML ="you browser does not support xmlhttprequest ";
+                        return;
+                    }
+                    
+                    xmlhttp.open("GET",'ajax.php?name='+sName,true);
+                    xmlhttp.onreadystatechange = callback;
+                    xmlhttp.send(null);
+                }
+                
+                
+                function callback(){
+                    if(xmlhttp.readyState==4){
+                        if(xmlhttp.status==200){
+                            alert(xmlhttp.responseText);
+                        }
+                    }
+                }
+            }
+            
+                
+
+            
+            
+                
+                
+            
+                
+        </script>
+    </body>
+</html>
