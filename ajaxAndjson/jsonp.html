@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <script>
+            function show(data){
+                alert('I am local,I can be used by remote.js,data is '+ data.result);
+            }
+            function flightHandler(data){
+                alert('the flight you query is price'+data.price+' RMB,'+ data.tickets+ ' ge');  
+            }
+            var url = 'http://192.168.6.203/hannahtest/remote.php?code=ABC&callback=flightHandle';
+            var script = document.createElement("script");
+            script.setAttribute("src",url);
+            document.getElementsByTagName('head')[0].appendChild(script);
+            //http://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html#!comments
+        </script>
+    </body>
+</html>
